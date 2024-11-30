@@ -27,7 +27,10 @@
     "paths": {
       "@app/*": ["app/*"],
       "@appServices/*": ["services/*"],
-      "@appTypes/*": ["types/*"]
+      "@appTypes/*": ["types/*"],
+      "@appPages/*": ["pages/*"],
+      "@appLayouts/*": ["layouts/*"],
+      "@appComponents/*": ["components/*"]
     }
   },
   "include": ["src"]
