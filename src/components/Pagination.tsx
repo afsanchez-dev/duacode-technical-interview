@@ -1,3 +1,5 @@
+import { useBreakpoint } from "@appHooks/useBreakpoint";
+
 interface PaginationProps {
   currPage: number;
   totalPages: number;
@@ -8,25 +10,46 @@ export const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   setPage,
 }) => {
+  const currBreakpoint = useBreakpoint();
+
   const calcPages = (): number[] => {
     const firstPage = 1;
     const prevPage = currPage - 1;
     const nextPage = currPage + 1;
     const lastPage = totalPages;
 
-    const caclPrev = prevPage > firstPage ? prevPage : -1;
+    const calcPrev = prevPage > firstPage ? prevPage : -1;
     const calcCurr =
       currPage > firstPage && currPage < lastPage ? currPage : -1;
     const calcNext = nextPage < totalPages ? nextPage : -1;
 
-    const pages = [firstPage, caclPrev, calcCurr, calcNext, lastPage];
+    const prevElipsisPage = prevPage - firstPage > 1 ? -2 : -1;
+    const nextElipsisPage = lastPage - nextPage > 1 ? -2 : -1;
+
+    let pages: number[] = [];
+
+    if (currBreakpoint === "default") {
+      pages = [currPage];
+    } else if (currBreakpoint === "sm") {
+      pages = [firstPage, prevElipsisPage, calcCurr, nextElipsisPage, lastPage];
+    } else {
+      pages = [
+        firstPage,
+        prevElipsisPage,
+        calcPrev,
+        calcCurr,
+        calcNext,
+        nextElipsisPage,
+        lastPage,
+      ];
+    }
 
     return pages.filter((page) => page !== -1);
   };
 
   return (
     <nav aria-label="User list page navigation">
-      <ul className="inline-flex -space-x-px text-base h-10">
+      <ul className="inline-flex -space-x-px text-sm md:text-base h-10">
         <li>
           <button
             onClick={() => setPage(currPage - 1)}
@@ -43,23 +66,24 @@ export const Pagination: React.FC<PaginationProps> = ({
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M5 1 1 5l4 4"
               />
             </svg>
           </button>
         </li>
-        {calcPages().map((pageNumber) => {
+        {calcPages().map((pageNumber, index) => {
           return (
-            <li>
+            <li key={index}>
               <button
                 onClick={() => setPage(pageNumber)}
+                disabled={pageNumber === -2}
                 className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 aria-label={"Page " + pageNumber}
               >
-                {pageNumber}
+                {pageNumber !== -2 ? pageNumber : "..."}
               </button>
             </li>
           );
@@ -80,9 +104,9 @@ export const Pagination: React.FC<PaginationProps> = ({
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 9 4-4-4-4"
               />
             </svg>

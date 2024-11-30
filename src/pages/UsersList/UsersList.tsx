@@ -23,10 +23,15 @@ export const UsersList = () => {
           <div className="flex flex-col items-center gap-2">
             <div className="mx-auto grid grid-cols-1 gap-4 max-w-fit md:grid-cols-2 lg:grid-cols-3">
               {usersListResp.data.map((user) => {
-                return <UserCard user={user} />;
+                return (
+                  <div key={user.id}>
+                    <UserCard user={user} />
+                  </div>
+                );
               })}
             </div>
             <div className="mt-4">
+              {/** Modify this to check how the Pagination component works with multiple pages ;)*/}
               <Pagination
                 currPage={page}
                 totalPages={usersListResp.total_pages}

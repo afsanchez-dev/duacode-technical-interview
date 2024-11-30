@@ -30,7 +30,8 @@
       "@appTypes/*": ["types/*"],
       "@appPages/*": ["pages/*"],
       "@appLayouts/*": ["layouts/*"],
-      "@appComponents/*": ["components/*"]
+      "@appComponents/*": ["components/*"],
+      "@appHooks/*": ["hooks/*"]
     }
   },
   "include": ["src"]

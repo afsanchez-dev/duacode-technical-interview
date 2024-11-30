@@ -5,6 +5,9 @@ import { resolve } from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    sourcemap: true,
+  },
   resolve: {
     alias: {
       "@app": resolve(__dirname, "src/app"),
@@ -13,6 +16,7 @@ export default defineConfig({
       "@appPages": resolve(__dirname, "src/pages"),
       "@appLayouts": resolve(__dirname, "src/layouts"),
       "@appComponents": resolve(__dirname, "src/components"),
+      "@appHooks": resolve(__dirname, "src/hooks"),
     },
   },
 });
