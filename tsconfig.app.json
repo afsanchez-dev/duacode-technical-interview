@@ -31,7 +31,8 @@
       "@appPages/*": ["pages/*"],
       "@appLayouts/*": ["layouts/*"],
       "@appComponents/*": ["components/*"],
-      "@appHooks/*": ["hooks/*"]
+      "@appHooks/*": ["hooks/*"],
+      "@appAssets/*": ["assets/*"]
     }
   },
   "include": ["src"]

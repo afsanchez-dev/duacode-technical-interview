@@ -17,6 +17,7 @@ export default defineConfig({
       "@appLayouts": resolve(__dirname, "src/layouts"),
       "@appComponents": resolve(__dirname, "src/components"),
       "@appHooks": resolve(__dirname, "src/hooks"),
+      "@appAssets": resolve(__dirname, "src/assets"),
     },
   },
 });
