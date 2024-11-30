@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <footer className="flex flex-row flex-wrap gap-2 text-center justify-center">
-      <p className="text-sm font-thin text-gray-500 md:text-base">
+      <p className="text-sm font-thin text-custom-secondary md:text-base">
         Duacode technical interview by Adolfo Fanjul Sánchez
       </p>
       <img
