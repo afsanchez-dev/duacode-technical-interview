@@ -21,7 +21,7 @@ export const UsersList = () => {
           "Error" /** TODO Error page */
         ) : usersListResp != null ? (
           <div className="flex flex-col items-center gap-2">
-            <div className="mx-auto grid grid-cols-1 gap-4 max-w-fit sm:grid-cols-2 md:grid-cols-3">
+            <div className="mx-auto grid grid-cols-1 gap-4 max-w-fit md:grid-cols-2 lg:grid-cols-3">
               {usersListResp.data.map((user) => {
                 return <UserCard user={user} />;
               })}
