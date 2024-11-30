@@ -3,15 +3,18 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
-import App from "./App.tsx";
 import { store } from "@app/store.ts";
+import { UsersList } from "@appPages/UsersList/UsersList";
+import MainLayout from "@appLayouts/MainLayout";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<UsersList />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>
