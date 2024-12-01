@@ -16,8 +16,8 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<UsersList />} />
-            <Route path="/:id" element={<UserDetail />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="users/:id" element={<UserDetail />} />
             <Route path="/create-user" element={<UserForm isCreate={true} />} />
             <Route
               path="/edit-user/:id"

@@ -1,3 +1,4 @@
+import { BackButton } from "@appComponents/BackButton";
 import { Spinner } from "@appComponents/Spinner";
 import { UserCard } from "@appComponents/UserCard";
 import { ErrorPage } from "@appPages/Error/ErrorPage";
@@ -18,11 +19,14 @@ export const UserDetail = () => {
     );
   }
   return (
-    <div className="flex min-w-full">
-      {isLoading ? <Spinner /> : null}
-      {user != null && user.data != null ? (
-        <UserCard user={user.data} isDetailed={true} isEditable={true} />
-      ) : null}
+    <div className="flex flex-col gap-6">
+      <div className="flex min-w-full">
+        {isLoading ? <Spinner /> : null}
+        {user != null && user.data != null ? (
+          <UserCard user={user.data} isDetailed={true} isEditable={true} />
+        ) : null}
+      </div>
+      <BackButton text="Go Back" />
     </div>
   );
 };

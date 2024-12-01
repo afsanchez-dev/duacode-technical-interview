@@ -20,7 +20,7 @@ export const UsersList = () => {
   if (isLoading) {
     return (
       <div className="flex items-center">
-        <Spinner />
+        <Spinner size={"30"} />
       </div>
     );
   } else if (isError || usersListResp == null) {
@@ -35,13 +35,10 @@ export const UsersList = () => {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col max-w-fit items-center md:items-start">
-        <button
-          onClick={handleCreateUser}
-          className="bg-blue-600 p-2 rounded-lg mb-4"
-        >
+        <button onClick={handleCreateUser} className="btn mb-4">
           <div className="flex flex-row gap-2">
             <svg
-              className="w-6 h-6 text-gray-800 dark:text-white"
+              className="w-6 h-6 text-custom-text-normal"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -63,7 +60,11 @@ export const UsersList = () => {
         <div className="grid grid-cols-1 gap-8 max-w-fit md:grid-cols-2 lg:grid-cols-3">
           {usersListResp.data.map((user) => {
             return (
-              <Link key={user.id} to={`/${user.id}`}>
+              <Link
+                className="hover:outline-double hover:outline-custom-secondary-hover hover:rounded-md hover:outline-4"
+                key={user.id}
+                to={`/users/${user.id}`}
+              >
                 <UserCard user={user} isDetailed={false} isEditable={false} />
               </Link>
             );
