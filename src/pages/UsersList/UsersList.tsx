@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useGetUsersListByPageQuery } from "@appServices/user/userService";
 import { Spinner } from "@appComponents/Spinner";
-import { UserCard } from "@appPages/UsersList/UserCard";
+import { UserCard } from "@appComponents/UserCard";
 import { Pagination } from "@appComponents/Pagination";
 import { ErrorPage } from "@appPages/Error/ErrorPage";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export const UsersList = () => {
   const [page, setPage] = useState(1);
@@ -33,7 +33,7 @@ export const UsersList = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-5 lg:p-10 gap-4">
+    <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col max-w-fit items-center md:items-start">
         <button
           onClick={handleCreateUser}
@@ -60,22 +60,24 @@ export const UsersList = () => {
             Create new user
           </div>
         </button>
-        <div className="grid grid-cols-1 gap-6 max-w-fit md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 max-w-fit md:grid-cols-2 lg:grid-cols-3">
           {usersListResp.data.map((user) => {
             return (
-              <div key={user.id}>
-                <UserCard user={user} />
-              </div>
+              <Link key={user.id} to={`/${user.id}`}>
+                <UserCard user={user} isDetailed={false} isEditable={false} />
+              </Link>
             );
           })}
         </div>
       </div>
-      {/** Modify this to check how the Pagination component works with multiple pages ;)*/}
-      <Pagination
-        currPage={page}
-        totalPages={usersListResp.total_pages}
-        setPage={setPage}
-      />
+      <div className="mt-4">
+        {/** Modify this to check how the Pagination component works with multiple pages ;)*/}
+        <Pagination
+          currPage={page}
+          totalPages={usersListResp.total_pages}
+          setPage={setPage}
+        />
+      </div>
     </div>
   );
 };

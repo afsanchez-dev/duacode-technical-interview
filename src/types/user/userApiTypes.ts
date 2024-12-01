@@ -8,4 +8,8 @@ export interface ListUsersResponse {
   data: User[];
 }
 
+export type UserDetailResponse = {
+  data: User;
+};
+
 export type CreateUserResponse = User;
