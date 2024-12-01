@@ -312,8 +312,20 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
       </div>
       {data != null && !isClosedToast ? (
         <ToastNotification
-          title={isCreate ? "User created" : "User updated"}
-          description={isCreate ? "has been created" : "has been updated"}
+          title={
+            isError
+              ? "An errror occured"
+              : isCreate
+              ? "User created"
+              : "User updated"
+          }
+          description={
+            isError
+              ? "No updates have been made"
+              : isCreate
+              ? "has been created"
+              : "has been updated"
+          }
           user={data}
           isError={isError}
           onClose={() => setIsClosedToast(true)}
