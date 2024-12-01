@@ -68,8 +68,8 @@ export const UserForm = () => {
     }
 
     const newUser: User = {
-      id: Math.random(), // Should use uuid generator, but this is just an example.
-      email,
+      id: Math.ceil(Math.random() * 40), // Should use uuid generator, but this is just an example.
+      email: email.toLowerCase(),
       first_name: firstName,
       last_name: lastName,
       avatar: avatarImg,
@@ -80,7 +80,7 @@ export const UserForm = () => {
 
   useEffect(() => {
     if (data != null) {
-      setTimeout(() => navigate("/"), 3000);
+      setTimeout(() => navigate("/"), 3200);
     }
   }, [data, navigate]);
 
