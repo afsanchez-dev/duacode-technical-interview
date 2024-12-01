@@ -8,6 +8,7 @@ import { UsersList } from "@appPages/UsersList/UsersList";
 import MainLayout from "@appLayouts/MainLayout";
 import { ErrorPage } from "@appPages/Error/ErrorPage";
 import { UserForm } from "@appPages/UserForm/UserForm";
+import { UserDetail } from "@appPages/UserDetail/UserDetail";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<UsersList />} />
+            <Route path="/:id" element={<UserDetail />} />
             <Route path="/create-user" element={<UserForm />} />
             <Route
               path="*"

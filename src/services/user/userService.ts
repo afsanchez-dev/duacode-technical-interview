@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   CreateUserResponse,
+  UserDetailResponse,
   type ListUsersResponse,
 } from "@appTypes/user/userApiTypes";
 import { User } from "@appTypes/user/userType";
@@ -12,6 +13,9 @@ export const userApi = createApi({
     getUsersListByPage: builder.query<ListUsersResponse, number>({
       query: (page) => `?page=${page}`,
     }),
+    getUserById: builder.query<UserDetailResponse, number>({
+      query: (id) => `/${id}`,
+    }),
     createUser: builder.mutation<CreateUserResponse, User>({
       query: (body) => ({
         url: "",
@@ -22,4 +26,8 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetUsersListByPageQuery, useCreateUserMutation } = userApi;
+export const {
+  useGetUsersListByPageQuery,
+  useGetUserByIdQuery,
+  useCreateUserMutation,
+} = userApi;
