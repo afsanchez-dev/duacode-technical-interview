@@ -33,7 +33,7 @@ export const UsersList = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="animate-fade-down flex flex-col items-center gap-4 -mt-6">
       <div className="flex flex-col max-w-fit items-center md:items-start">
         <button onClick={handleCreateUser} className="btn mb-4">
           <div className="flex flex-row gap-2">
@@ -61,7 +61,7 @@ export const UsersList = () => {
           {usersListResp.data.map((user) => {
             return (
               <Link
-                className="hover:outline-double hover:outline-custom-secondary-hover hover:rounded-md hover:outline-4"
+                className="animate-fade hover:outline-double hover:outline-custom-secondary-hover hover:rounded-md hover:outline-4"
                 key={user.id}
                 to={`/users/${user.id}`}
               >

@@ -1,5 +1,7 @@
 import { User } from "@appTypes/user/userType";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import userCircle from "@appAssets/user-circle.svg";
 
 interface UserCardProps {
   user: User;
@@ -12,6 +14,8 @@ export const UserCard: React.FC<UserCardProps> = ({
   isDetailed,
   isEditable,
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const getEditButton = (): JSX.Element => {
@@ -60,8 +64,10 @@ export const UserCard: React.FC<UserCardProps> = ({
           className={`object-cover ${
             isEditable || isDetailed ? "w-40 h-40 md:w-64 md:h-64" : "w-32 h-32"
           } rounded-full shadow-lg`}
-          src={user.avatar}
+          src={isLoading || hasError ? userCircle : user.avatar}
           alt={user.first_name + " " + "image"}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setHasError(true)}
         />
         <div>
           <h5 className="text-custom-text-normal text-2xl font-medium">

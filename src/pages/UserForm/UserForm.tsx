@@ -128,7 +128,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
   }
 
   return (
-    <div className="flex flex-col max-w-full gap-4 items-center justify-center -mt-12">
+    <div className="animate-fade flex flex-col max-w-full gap-4 items-center justify-center -mt-12">
       <h2 className="text-2xl font-semibold mb-2">
         {isCreate ? "Create new user" : "Edit User"}
       </h2>

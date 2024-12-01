@@ -81,8 +81,8 @@ export const Pagination: React.FC<PaginationProps> = ({
                 onClick={() => setPage(pageNumber)}
                 disabled={pageNumber === -2}
                 className={`flex items-center justify-center px-4 h-10 leading-tight ${
-                  currPage === pageNumber ? "bg-gray-500" : ""
-                } border bg-gray-800 border-gray-700 text-gray-200 hover:bg-gray-700 hover:text-white`}
+                  currPage === pageNumber ? "bg-gray-500" : "bg-gray-800"
+                } border border-gray-700 text-gray-200 hover:bg-gray-700 hover:text-white`}
                 aria-label={"Page " + pageNumber}
               >
                 {pageNumber !== -2 ? pageNumber : "..."}
