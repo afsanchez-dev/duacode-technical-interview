@@ -7,3 +7,5 @@ export interface ListUsersResponse {
   total_pages: number;
   data: User[];
 }
+
+export type CreateUserResponse = User;
