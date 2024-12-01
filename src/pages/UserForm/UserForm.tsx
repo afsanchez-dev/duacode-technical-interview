@@ -9,6 +9,7 @@ import { Tooltip } from "react-tooltip";
 import { ToastNotification } from "./ToastNotification";
 import { useNavigate, useParams } from "react-router";
 import { ErrorPage } from "@appPages/Error/ErrorPage";
+import { BackButton } from "@appComponents/BackButton";
 
 interface UserFormProps {
   isCreate: boolean;
@@ -111,7 +112,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
 
   useEffect(() => {
     if (data != null) {
-      setTimeout(() => navigate("/"), 3200);
+      setTimeout(() => navigate("/users"), 3200);
     }
   }, [data, navigate]);
 
@@ -127,12 +128,12 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
   }
 
   return (
-    <div className="flex flex-col max-w-full gap-4 items-center -mt-12">
+    <div className="animate-fade flex flex-col max-w-full gap-4 items-center justify-center -mt-12">
       <h2 className="text-2xl font-semibold mb-2">
         {isCreate ? "Create new user" : "Edit User"}
       </h2>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col justify-center gap-4">
           {/** Avatar */}
           <div
             id="avatar-selector"
@@ -140,7 +141,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
           >
             <label
               htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-32 h-32 border-1 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="flex flex-col items-center justify-center w-32 h-32 border-1  border-dashed rounded-full cursor-pointer bg-gray-700 border-gray-600 hover:border-gray-500 hover:bg-gray-600"
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 {avatarImg.length > 0 ? (
@@ -182,18 +183,22 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
                 ref={refAvatar}
               />
             </label>
-            <Tooltip anchorSelect="#avatar-selector" place="bottom">
+            <Tooltip
+              className="z-10"
+              anchorSelect="#avatar-selector"
+              place="bottom"
+            >
               {"Select a .png or .jpg file to add an avatar (optional)"}
             </Tooltip>
           </div>
           {avatarImg.length > 0 ? (
             <button
               type="button"
-              className="flex flex-row gap-1 items-center -mt-1 text-sm mx-auto rounded-lg bg-custom-primary p-2 max-w-fit"
+              className="btn flex flex-row gap-1 items-center -mt-1 text-sm mx-auto rounded-lg bg-custom-primary p-2 max-w-fit"
               onClick={() => setAvatarImg("")}
             >
               <svg
-                className="w-4 h-4 text-gray-800 dark:text-white"
+                className="w-4 h-4 text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -214,7 +219,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
           ) : null}
           {avatarError.length > 0 ? (
             <div className="flex max-w-full items-center justify-center mb-1">
-              <span className="text-custom-error-text">{avatarError}</span>
+              <span className="text-custom-error-primary">{avatarError}</span>
             </div>
           ) : null}
 
@@ -222,14 +227,17 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
           <div id="email-container">
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-white"
             >
-              {"Email (required)"}
+              <span className="text-custom-text-normal">
+                Email{" "}
+                <span className="text-custom-text-subtle">(required)</span>
+              </span>
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                 <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -243,7 +251,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
                 type="email"
                 ref={refEmail}
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="input"
                 placeholder="name@duacode.com"
                 required
               />
@@ -255,12 +263,15 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
               htmlFor="first-name"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              {"First name (required)"}
+              <span className="text-custom-text-normal">
+                First name{" "}
+                <span className="text-custom-text-subtle">(required)</span>
+              </span>
             </label>
             <input
               type="text"
               id="first-name"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="input ps-4"
               placeholder="John"
               ref={refFirstName}
               required
@@ -272,12 +283,15 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
               htmlFor="last-name"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              {"Last name (required)"}
+              <span className="text-custom-text-normal">
+                Last name{" "}
+                <span className="text-custom-text-subtle">(required)</span>
+              </span>
             </label>
             <input
               type="text"
               id="last-name"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="input ps-4"
               placeholder="Doe"
               ref={refLastName}
               required
@@ -286,17 +300,32 @@ export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
           <button
             type="submit"
             autoFocus={true}
-            className="mt-2 mx-auto rounded-lg bg-custom-primary p-2 max-w-fit"
+            className="btn mt-2 mx-auto rounded-lg bg-custom-primary p-2"
             disabled={data != null}
           >
-            {isLoading ? <Spinner /> : "Submit"}
+            {isLoading ? <Spinner size={"6"} /> : "Submit"}
           </button>
         </div>
       </form>
+      <div className="mt-4">
+        <BackButton text="Go back" />
+      </div>
       {data != null && !isClosedToast ? (
         <ToastNotification
-          title={"User created"}
-          description={"has been created"}
+          title={
+            isError
+              ? "An errror occured"
+              : isCreate
+              ? "User created"
+              : "User updated"
+          }
+          description={
+            isError
+              ? "No updates have been made"
+              : isCreate
+              ? "has been created"
+              : "has been updated"
+          }
           user={data}
           isError={isError}
           onClose={() => setIsClosedToast(true)}

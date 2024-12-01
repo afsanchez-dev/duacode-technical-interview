@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import "./index.css";
 import { store } from "@app/store.ts";
 import { UsersList } from "@appPages/UsersList/UsersList";
@@ -16,13 +16,14 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<UsersList />} />
-            <Route path="/:id" element={<UserDetail />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="users/:id" element={<UserDetail />} />
             <Route path="/create-user" element={<UserForm isCreate={true} />} />
             <Route
               path="/edit-user/:id"
               element={<UserForm isCreate={false} />}
             />
+            <Route path="/" element={<Navigate to={"/users"} />}></Route>
             <Route
               path="*"
               element={

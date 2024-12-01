@@ -1,5 +1,7 @@
 import { User } from "@appTypes/user/userType";
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import userCircle from "@appAssets/user-circle.svg";
 
 interface UserCardProps {
   user: User;
@@ -12,17 +14,19 @@ export const UserCard: React.FC<UserCardProps> = ({
   isDetailed,
   isEditable,
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const getEditButton = (): JSX.Element => {
     return (
       <button
-        className="flex flex-row m-2 p-2 rounded-lg bg-custom-primary"
+        className="btn"
         aria-label="edit-user"
         onClick={() => navigate(`/edit-user/${user.id}`)}
       >
         <svg
-          className="w-6 h-6 text-gray-800 dark:text-white"
+          className="w-6 h-6"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -52,25 +56,26 @@ export const UserCard: React.FC<UserCardProps> = ({
   };
   return (
     <div
-      className={`flex flex-col max-w-full gap-2 rounded-lg shadow bg-custom-secondary ${
-        isDetailed ? "-mt-10 p-2" : "w-72"
-      }`}
+      className={`flex flex-col max-w-full gap-2 rounded-lg shadows bg-custom-secondary bg-opacity-80 
+         ${isDetailed ? "-mt-10 p-2" : "w-72"}`}
     >
       <div className="flex flex-col items-center gap-4 mt-4 mb-4 pr-5 pl-5 sm:mt-8 sm:mb-8 sm:pr-10 sm:pl-10 text-center">
         <img
           className={`object-cover ${
             isEditable || isDetailed ? "w-40 h-40 md:w-64 md:h-64" : "w-32 h-32"
           } rounded-full shadow-lg`}
-          src={user.avatar}
+          src={isLoading || hasError ? userCircle : user.avatar}
           alt={user.first_name + " " + "image"}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setHasError(true)}
         />
         <div>
-          <h5 className="text-2xl font-medium text-custom-text-normal">
+          <h5 className="text-custom-text-normal text-2xl font-medium">
             {user.first_name + " " + user.last_name}
           </h5>
           {isDetailed ? getDetailedInfo() : null}
           {isEditable ? (
-            <div className="flex mt-2 justify-center">{getEditButton()}</div>
+            <div className="flex mt-6 justify-center">{getEditButton()}</div>
           ) : null}
         </div>
       </div>

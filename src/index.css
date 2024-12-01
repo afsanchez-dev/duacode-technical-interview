@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply flex flex-row p-2 rounded-lg bg-custom-primary cursor-pointer transition-all ease-in-out duration-200 hover:btn-primary focus:btn-outline;
+  }
+  .btn-primary:hover {
+    @apply bg-custom-primary-hover;
+  }
+
+  .btn-outline {
+    @apply focus:ring-4 focus:ring-custom-primary-ring;
+  }
+
+  .input {
+    @apply border text-sm rounded-lg block w-full ps-10 p-2.5  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-custom-primary-ring focus:border-custom-primary-hover;
+  }
+
+  .link {
+    @apply font-semibold hover:underline text-custom-accent hover:text-custom-primary;
+  }
+}
