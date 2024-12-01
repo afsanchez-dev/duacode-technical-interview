@@ -39,8 +39,9 @@ Se ha utilizado [Vite](https://es.vitejs.dev/) como entorno de desarrollo, princ
 
 1. Si no se cuenta con [Node.js](https://nodejs.org/en/), instalar [aquí](https://nodejs.org/en/download/package-manager).
 2. (Opcional) Se puede utilizar [NVM](https://github.com/nvm-sh/nvm) y ejecutar el comando `$ nvm install 20.18.0`.
-3. Ejecutar dentro en el directorio raíz del proyecto `$ npm install`.
-4. Ejecutar `$ npm run dev` para lanzar la aplicación
+3. Clonar el repositorio con el comando `$ git clone git@github.com:afsanchez-dev/duacode-technical-interview.git`
+4. Ejecutar dentro en el directorio raíz del proyecto `$ npm install`.
+5. Ejecutar `$ npm run dev` para lanzar la aplicación
 
 ## Librerías
 
