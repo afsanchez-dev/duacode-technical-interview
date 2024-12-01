@@ -38,7 +38,7 @@ Se ha utilizado [Vite](https://es.vitejs.dev/) como entorno de desarrollo, princ
 ## Instalación
 
 1. Si no se cuenta con [Node.js](https://nodejs.org/en/), instalar [aquí](https://nodejs.org/en/download/package-manager).
-2. Si se prefiere se puede utilizar [NVM](https://github.com/nvm-sh/nvm) y ejecutar el comando `$ nvm install 20.18.0`.
+2. (Opcional) Se puede utilizar [NVM](https://github.com/nvm-sh/nvm) y ejecutar el comando `$ nvm install 20.18.0`.
 3. Ejecutar dentro en el directorio raíz del proyecto `$ npm install`.
 4. Ejecutar `$ npm run dev` para lanzar la aplicación
 
