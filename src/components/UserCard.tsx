@@ -1,5 +1,5 @@
-import { useBreakpoint } from "@appHooks/useBreakpoint";
 import { User } from "@appTypes/user/userType";
+import { useNavigate } from "react-router";
 
 interface UserCardProps {
   user: User;
@@ -12,13 +12,14 @@ export const UserCard: React.FC<UserCardProps> = ({
   isDetailed,
   isEditable,
 }) => {
-  const breakpoint = useBreakpoint();
+  const navigate = useNavigate();
 
   const getEditButton = (): JSX.Element => {
     return (
       <button
         className="flex flex-row m-2 p-2 rounded-lg bg-custom-primary"
         aria-label="edit-user"
+        onClick={() => navigate(`/edit-user/${user.id}`)}
       >
         <svg
           className="w-6 h-6 text-gray-800 dark:text-white"
@@ -41,8 +42,6 @@ export const UserCard: React.FC<UserCardProps> = ({
       </button>
     );
   };
-
-  console.log(breakpoint);
 
   const getDetailedInfo = (): JSX.Element => {
     return (

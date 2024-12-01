@@ -1,12 +1,19 @@
 import { Spinner } from "@appComponents/Spinner";
-import { useCreateUserMutation } from "@appServices/user/userService";
+import {
+  useCreateUserMutation,
+  useGetUserByIdQuery,
+} from "@appServices/user/userService";
 import { User } from "@appTypes/user/userType";
 import { useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-tooltip";
 import { ToastNotification } from "./ToastNotification";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { ErrorPage } from "@appPages/Error/ErrorPage";
 
-export const UserForm = () => {
+interface UserFormProps {
+  isCreate: boolean;
+}
+export const UserForm: React.FC<UserFormProps> = ({ isCreate }) => {
   const refAvatar = useRef<HTMLInputElement>(null);
   const refEmail = useRef<HTMLInputElement>(null);
   const refFirstName = useRef<HTMLInputElement>(null);
@@ -17,6 +24,30 @@ export const UserForm = () => {
   const [createUser, useCreateUserResult] = useCreateUserMutation();
   const { data, isLoading, isError } = useCreateUserResult;
   const [isClosedToast, setIsClosedToast] = useState<boolean>(false);
+  const [userId, setUserId] = useState<number>(-1);
+
+  const params = useParams();
+
+  useEffect(() => {
+    if (params != null && params.id != null) {
+      setUserId(parseInt(params.id));
+    }
+  }, [params]);
+
+  const { data: user, isError: isErrorUser } = useGetUserByIdQuery(userId, {
+    skip: userId === -1,
+  });
+
+  useEffect(() => {
+    if (user != null) {
+      setAvatarImg(user.data.avatar);
+      if (refEmail.current != null) refEmail.current.value = user.data.email;
+      if (refFirstName.current != null)
+        refFirstName.current.value = user.data.first_name;
+      if (refLastName.current != null)
+        refLastName.current.value = user.data.last_name;
+    }
+  }, [user, isError]);
 
   const navigate = useNavigate();
 
@@ -84,9 +115,22 @@ export const UserForm = () => {
     }
   }, [data, navigate]);
 
+  if (isErrorUser) {
+    return (
+      <ErrorPage
+        errorMessage={"User data fetching failed"}
+        errorDescription={
+          "Something unexpected happened or the user does not exist."
+        }
+      />
+    );
+  }
+
   return (
-    <div className="pt-10 flex flex-col max-w-full gap-4 items-center">
-      <h2 className="text-2xl font-semibold mb-2">Create new user</h2>
+    <div className="flex flex-col max-w-full gap-4 items-center -mt-12">
+      <h2 className="text-2xl font-semibold mb-2">
+        {isCreate ? "Create new user" : "Edit User"}
+      </h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="flex flex-col gap-4">
           {/** Avatar */}
