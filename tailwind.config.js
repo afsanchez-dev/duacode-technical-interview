@@ -9,8 +9,11 @@ export default {
         "custom-secondary": "#AAABB8",
         "custom-primary": "#29648A",
         "custom-bg": "#25274D",
+        "custom-error-text": "#FF0000",
+        "custom-error-primary": "#FF0000",
+        "custom-error-secondary": "#FF1000",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };
